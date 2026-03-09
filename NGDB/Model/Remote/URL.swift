@@ -2,6 +2,17 @@ import Foundation
 
 extension URL {
 
+	static var base: URL {
+		URL(string: "https://api.themoviedb.org/3")!
+	}
+
+	static var discover: URL {
+		base.appendingPathComponent("discover").appendingPathComponent("movie")
+	}
+}
+
+extension URL {
+
 	var queryItems: [URLQueryItem]? {
 		get { URLComponents(string: absoluteString)?.queryItems }
 		set { modify { $0.queryItems = newValue } }

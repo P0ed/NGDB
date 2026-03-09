@@ -3,24 +3,14 @@ import SwiftData
 
 @main
 struct NGDBApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Movie.self,
-			MovieIndex.self,
-			MovieList.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+	var sharedModelContainer: ModelContainer = .movies
 
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+	@AppStorage(wrappedValue: "", "APIKey")
+	var apiKey: String
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+			ContentView(list: .init(identifier: "main"))
         }
         .modelContainer(sharedModelContainer)
     }
