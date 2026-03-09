@@ -13,7 +13,12 @@ extension NetworkSession {
 
 	static var urlSession: Self {
 		Self { [session = URLSession(configuration: .default)] request in
-			let (data, rawMeta) = try await session.data(for: request)
+			let (data, rawMeta) = try await session.data(for: modifying(request) { request in
+//				request.setValue("Bearer \("token")", forHTTPHeaderField: "Authorization")
+				request.url?.modify { cpts in
+					cpts.queryItems.append(URLQueryItem(name: "api_key", value: "key"))
+				}
+			})
 			return Response(meta: try cast(rawMeta), data: data)
 		}
 	}

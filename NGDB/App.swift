@@ -5,7 +5,9 @@ import SwiftData
 struct NGDBApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            Movie.self,
+			MovieIndex.self,
+			MovieList.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
