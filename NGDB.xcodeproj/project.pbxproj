@@ -6,17 +6,30 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		5F87C7CC2F5F2C26006ECC78 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F87C7C72F5F2C26006ECC78 /* App.swift */; };
+		5F87C7CD2F5F2C26006ECC78 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F87C7C92F5F2C26006ECC78 /* ContentView.swift */; };
+		5F87C7CE2F5F2C26006ECC78 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F87C7CA2F5F2C26006ECC78 /* Item.swift */; };
+		5F87C7CF2F5F2C26006ECC78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F87C7C82F5F2C26006ECC78 /* Assets.xcassets */; };
+		5F87C7D32F5F2D5D006ECC78 /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F87C7D22F5F2D5D006ECC78 /* NetworkSession.swift */; };
+		5F87C7D52F5F2DAE006ECC78 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F87C7D42F5F2DA8006ECC78 /* Errors.swift */; };
+		5F87C7D72F5F2E13006ECC78 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F87C7D62F5F2E12006ECC78 /* URL.swift */; };
+		5F87C7D92F5F2E49006ECC78 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F87C7D82F5F2E47006ECC78 /* Functions.swift */; };
+		5F87C7DB2F5F2FF7006ECC78 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F87C7DA2F5F2FF5006ECC78 /* API.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		5F87C7B72F5F2C12006ECC78 /* NGDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NGDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F87C7C72F5F2C26006ECC78 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		5F87C7C82F5F2C26006ECC78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5F87C7C92F5F2C26006ECC78 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		5F87C7CA2F5F2C26006ECC78 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		5F87C7D22F5F2D5D006ECC78 /* NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
+		5F87C7D42F5F2DA8006ECC78 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		5F87C7D62F5F2E12006ECC78 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
+		5F87C7D82F5F2E47006ECC78 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
+		5F87C7DA2F5F2FF5006ECC78 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		5F87C7B92F5F2C12006ECC78 /* NGDB */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = NGDB;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		5F87C7B42F5F2C12006ECC78 /* Frameworks */ = {
@@ -32,7 +45,7 @@
 		5F87C7AE2F5F2C12006ECC78 = {
 			isa = PBXGroup;
 			children = (
-				5F87C7B92F5F2C12006ECC78 /* NGDB */,
+				5F87C7CB2F5F2C26006ECC78 /* NGDB */,
 				5F87C7B82F5F2C12006ECC78 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,6 +56,38 @@
 				5F87C7B72F5F2C12006ECC78 /* NGDB.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		5F87C7CB2F5F2C26006ECC78 /* NGDB */ = {
+			isa = PBXGroup;
+			children = (
+				5F87C7D02F5F2D41006ECC78 /* Model */,
+				5F87C7D12F5F2D4C006ECC78 /* View */,
+				5F87C7C72F5F2C26006ECC78 /* App.swift */,
+				5F87C7C82F5F2C26006ECC78 /* Assets.xcassets */,
+			);
+			path = NGDB;
+			sourceTree = "<group>";
+		};
+		5F87C7D02F5F2D41006ECC78 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5F87C7D42F5F2DA8006ECC78 /* Errors.swift */,
+				5F87C7D82F5F2E47006ECC78 /* Functions.swift */,
+				5F87C7CA2F5F2C26006ECC78 /* Item.swift */,
+				5F87C7D62F5F2E12006ECC78 /* URL.swift */,
+				5F87C7D22F5F2D5D006ECC78 /* NetworkSession.swift */,
+				5F87C7DA2F5F2FF5006ECC78 /* API.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5F87C7D12F5F2D4C006ECC78 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5F87C7C92F5F2C26006ECC78 /* ContentView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -59,9 +104,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				5F87C7B92F5F2C12006ECC78 /* NGDB */,
 			);
 			name = NGDB;
 			packageProductDependencies = (
@@ -109,6 +151,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F87C7CF2F5F2C26006ECC78 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,6 +162,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F87C7CC2F5F2C26006ECC78 /* App.swift in Sources */,
+				5F87C7D72F5F2E13006ECC78 /* URL.swift in Sources */,
+				5F87C7D52F5F2DAE006ECC78 /* Errors.swift in Sources */,
+				5F87C7D92F5F2E49006ECC78 /* Functions.swift in Sources */,
+				5F87C7D32F5F2D5D006ECC78 /* NetworkSession.swift in Sources */,
+				5F87C7CD2F5F2C26006ECC78 /* ContentView.swift in Sources */,
+				5F87C7DB2F5F2FF7006ECC78 /* API.swift in Sources */,
+				5F87C7CE2F5F2C26006ECC78 /* Item.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,7 +318,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
@@ -298,7 +348,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;

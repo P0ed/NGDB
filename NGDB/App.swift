@@ -1,10 +1,3 @@
-//
-//  NGDBApp.swift
-//  NGDB
-//
-//  Created by Konstantin Sukharev on 09.03.26.
-//
-
 import SwiftUI
 import SwiftData
 

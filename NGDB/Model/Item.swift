@@ -1,10 +1,3 @@
-//
-//  Item.swift
-//  NGDB
-//
-//  Created by Konstantin Sukharev on 09.03.26.
-//
-
 import Foundation
 import SwiftData
 
