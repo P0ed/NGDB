@@ -1,14 +1,17 @@
 import Foundation
 
+/// Private DSL to reduce boilerplate
+private func / (lhs: URL, rhs: String) -> URL {
+	lhs.appendingPathComponent(rhs)
+}
+
 extension URL {
 
-	static var base: URL {
-		URL(string: "https://api.themoviedb.org/3")!
-	}
+	static var base: URL { URL(string: "https://api.themoviedb.org/3")! }
 
-	static var discover: URL {
-		base.appendingPathComponent("discover").appendingPathComponent("movie")
-	}
+	static var discover: URL { base / "discover" / "movie" }
+	static var search: URL { base / "search" / "movie" }
+	static func details(_ id: String) -> URL { base / "movie" / id }
 }
 
 extension URL {

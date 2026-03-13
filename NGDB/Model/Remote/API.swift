@@ -12,7 +12,9 @@ extension API {
 		let session = NetworkSession.urlSession
 
 		return API(
-			discover: { page in try await session.get(url: .discover, args: ["page": "\(page)"]) }
+			discover: { page in
+				try await session.get(url: .discover, args: ["page": "\(page)"])
+			}
 		)
 	}
 }
@@ -20,7 +22,7 @@ extension API {
 extension API {
 
 	struct Error: Swift.Error, Decodable {
-
+		var message: String
 	}
 
 	struct Discover: Decodable {

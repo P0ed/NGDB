@@ -7,7 +7,7 @@ final class Movie {
 	var identifier: String
     var title: String
 
-	@Relationship(deleteRule: .nullify, inverse: \MovieIndex.movie)
+	@Relationship(deleteRule: .cascade, inverse: \MovieIndex.movie)
 	var indices: [MovieIndex] = []
 
 	init(identifier: String, title: String) {

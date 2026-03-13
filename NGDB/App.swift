@@ -3,15 +3,16 @@ import SwiftData
 
 @main
 struct NGDBApp: App {
-	var sharedModelContainer: ModelContainer = .movies
+	var modelContainer: ModelContainer = .movies
 
-	@AppStorage(wrappedValue: "", "APIKey")
-	var apiKey: String
+	@UserDefault(default: User())
+	var user: User
 
     var body: some Scene {
         WindowGroup {
-			ContentView(list: .init(identifier: "main"))
+			DiscoverView(list: .main(in: modelContainer.mainContext))
         }
-        .modelContainer(sharedModelContainer)
+        .modelContainer(modelContainer)
+		.environment(\.user, user)
     }
 }
