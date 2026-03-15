@@ -28,8 +28,11 @@ extension Movie {
 	}
 
 	var posterURL: URL? {
-		poster.flatMap { path in
-			.none
-		}
+		poster.flatMap { path in .image(path: path) }
+	}
+
+	func load(using api: API) async throws {
+		let remote = try await api.details(Int(uid))
+		fill(remote)
 	}
 }

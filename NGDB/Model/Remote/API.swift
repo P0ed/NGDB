@@ -1,5 +1,6 @@
 struct API {
 	var discover: (Int) async throws -> Discover
+	var details: (Int) async throws -> DiscoverResult
 }
 
 /// API implementation
@@ -11,6 +12,9 @@ extension API {
 		return API(
 			discover: { page in
 				try await session.get(url: .discover, args: ["page": "\(page)"])
+			},
+			details: { id in
+				try await session.get(url: .details(id))
 			}
 		)
 	}

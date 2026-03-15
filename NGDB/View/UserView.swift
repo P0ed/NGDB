@@ -6,6 +6,7 @@ struct UserView: View {
 
 	@State var signInPresented: Bool = false
 	@State var apiKey: String = ""
+	@State var copied: Bool = false
 
 	var body: some View {
 		NavigationStack {
@@ -69,9 +70,16 @@ struct UserView: View {
 		HStack {
 			Text("API key:")
 			Spacer()
-			if let key = user.apiKey {
+			if copied {
+				Text("Copied to pasteboard")
+			} else if let key = user.apiKey {
 				Button(key.masked) {
 					UIPasteboard.general.string = key
+					copied = true
+					Task {
+						try await Task.sleep(for: .seconds(1))
+						copied = false
+					}
 				}
 			} else {
 				Text("<none>")

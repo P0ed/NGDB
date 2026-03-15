@@ -8,8 +8,13 @@ struct MovieCell: View {
 
 	var body: some View {
 		HStack {
-			if settings.loadImages {
-//				Image(url: "")
+			if settings.loadImages, let url = movie.posterURL {
+				AsyncImage(url: url) { result in
+					result.image?
+						.resizable()
+						.scaledToFill()
+				}
+				.frame(maxWidth: 64.0)
 			}
 			Text(movie.title ?? "")
 			Spacer()

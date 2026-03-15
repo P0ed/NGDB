@@ -8,10 +8,12 @@ private func / (lhs: URL, rhs: String) -> URL {
 extension URL {
 
 	static var base: URL { URL(string: "https://api.themoviedb.org/3")! }
+	static var images: URL { URL(string: "https://image.tmdb.org/t/p/w500")! }
 
 	static var discover: URL { base / "discover" / "movie" }
 	static var search: URL { base / "search" / "movie" }
-	static func details(_ id: String) -> URL { base / "movie" / id }
+	static func details(_ id: Int) -> URL { base / "movie" / "\(id)" }
+	static func image(path: String) -> URL { images / path }
 }
 
 extension URL {
