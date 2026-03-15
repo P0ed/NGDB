@@ -17,6 +17,14 @@ struct PersistenceController {
 		})
 		container.viewContext.automaticallyMergesChangesFromParent = true
 	}
+
+	@MainActor
+	func reset() {
+		let ctx = NSManagedObjectContext.main
+		MovieList.fetch(in: ctx).forEach(ctx.delete)
+		Movie.fetch(in: ctx).forEach(ctx.delete)
+		try? ctx.save()
+	}
 }
 
 @MainActor

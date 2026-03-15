@@ -22,5 +22,14 @@ extension Movie {
 
 	func fill(_ remote: API.DiscoverResult) {
 		title = remote.title
+		overview = remote.overview
+		poster = remote.poster_path
+		releaseDate = remote.release_date
+	}
+
+	var posterURL: URL? {
+		poster.flatMap { path in
+			.none
+		}
 	}
 }

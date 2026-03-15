@@ -17,35 +17,20 @@ struct UserView: View {
 					Divider()
 					section("Settings") {
 						Toggle("Load images", isOn: $settings.loadImages)
+							.padding(.vertical)
 						Toggle("Low data mode", isOn: $settings.lowDataMode)
+							.padding(.vertical)
 					}
 				}
 				.padding()
 			}
-			.toolbar {
-				if user.apiKey != .none {
-					ToolbarItem(placement: .topBarTrailing) {
-						Button("Sign out", systemImage: "door.left.hand.open") {
-							user = User()
-						}
-					}
-				} else {
-					ToolbarItem(placement: .topBarTrailing) {
-						Button("Sign in", systemImage: "door.left.hand.closed") {
-							signInPresented = true
-							apiKey = ""
-						}
-					}
-				}
-			}
+			.toolbar { toolbar }
 			.alert(
 				"Sign in",
 				isPresented: $signInPresented,
 				actions: {
 					TextField("API key", text: $apiKey)
-					Button("Set", role: .confirm) {
-						user.apiKey = apiKey
-					}
+					Button("Set", role: .confirm) { user.apiKey = apiKey }
 					Button("Cancel", role: .cancel) {}
 				}
 			)
@@ -55,8 +40,28 @@ struct UserView: View {
 	func section(_ title: String, @ViewBuilder content: () -> some View) -> some View {
 		Group {
 			Text(title)
-				.font(.headline)
+				.font(.title)
+				.padding(.top)
 			content()
+		}
+	}
+
+	@ToolbarContentBuilder
+	var toolbar: some ToolbarContent {
+		if user.apiKey != .none {
+			ToolbarItem(placement: .topBarTrailing) {
+				Button("Sign out", systemImage: "door.left.hand.open") {
+					user = User()
+					PersistenceController.shared.reset()
+				}
+			}
+		} else {
+			ToolbarItem(placement: .topBarTrailing) {
+				Button("Sign in", systemImage: "door.left.hand.closed") {
+					apiKey = ""
+					signInPresented = true
+				}
+			}
 		}
 	}
 
@@ -72,6 +77,7 @@ struct UserView: View {
 				Text("<none>")
 			}
 		}
+		.padding(.vertical)
 	}
 }
 
