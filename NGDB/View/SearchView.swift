@@ -1,9 +1,10 @@
 import SwiftUI
 import CoreData
 
-struct DiscoverView: View {
+struct SearchView: View {
 	var list: MovieList
 
+	@State var query: String = ""
 	@Environment(\.managedObjectContext) private var modelContext
 	@Environment(\.user) private var user
 	@Environment(\.api) private var api
@@ -40,6 +41,16 @@ struct DiscoverView: View {
 			} else {
 				UnauthorizedPlaceholder()
 			}
+		}
+		.searchable(text: $query)
+		.onAppear {
+			query = ""
+			list.reset()
+		}
+		.onChange(of: query) { oldValue, newValue in
+			list.query = newValue
+			try? list.managedObjectContext?.save()
+			Task { try await list.load(using: api) }
 		}
 	}
 }

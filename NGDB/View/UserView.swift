@@ -18,8 +18,6 @@ struct UserView: View {
 					section("Settings") {
 						Toggle("Load images", isOn: $settings.loadImages)
 							.padding(.vertical, 4.0)
-						Toggle("Low data mode", isOn: $settings.lowDataMode)
-							.padding(.vertical, 4.0)
 					}
 				}
 				.padding()
@@ -101,6 +99,6 @@ struct UserView: View {
 private extension String {
 
 	var masked: String {
-		"\(prefix(4))********\(suffix(4))"
+		"\(prefix(4))••••••••\(suffix(4))"
 	}
 }

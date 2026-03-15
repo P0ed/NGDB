@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="24512" systemVersion="25D2128" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="1.0">
     <entity name="Movie" representedClassName="Movie" syncable="YES" codeGenerationType="class">
+        <attribute name="isFavourite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="overview" optional="YES" attributeType="String"/>
         <attribute name="poster" optional="YES" attributeType="String"/>
         <attribute name="releaseDate" optional="YES" attributeType="String"/>
@@ -15,6 +16,7 @@
     </entity>
     <entity name="MovieList" representedClassName="MovieList" syncable="YES" codeGenerationType="class">
         <attribute name="page" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="query" optional="YES" attributeType="String"/>
         <attribute name="totalPages" optional="YES" attributeType="Integer 32" usesScalarValueType="YES"/>
         <attribute name="uid" optional="YES" attributeType="String"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>

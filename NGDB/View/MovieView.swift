@@ -1,7 +1,8 @@
 import SwiftUI
+import CoreData
 
 struct MovieView: View {
-	var movie: Movie
+	@ObservedObject var movie: Movie
 
 	@Environment(\.api) var api
 
@@ -24,6 +25,21 @@ struct MovieView: View {
 			.padding()
 		}
 		.navigationTitle(movie.title ?? "#\(movie.uid)")
+		.toolbar {
+			ToolbarItem(placement: .topBarTrailing) {
+				if movie.isFavourite {
+					Button("Remove from favourites", systemImage: "star.fill") {
+						movie.isFavourite = false
+						try? movie.managedObjectContext?.save()
+					}
+				} else {
+					Button("Add to favourites", systemImage: "star") {
+						movie.isFavourite = true
+						try? movie.managedObjectContext?.save()
+					}
+				}
+			}
+		}
 		.task { [api, movie = movie.ref] in
 			try? await movie.deref(in: .main).load(using: api)
 		}

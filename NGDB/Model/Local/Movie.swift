@@ -14,13 +14,13 @@ extension Movie {
 		}
 	}
 
-	static func findOrCreate(_ remote: API.DiscoverResult, in context: NSManagedObjectContext) -> Movie {
+	static func findOrCreate(_ remote: API.Movie, in context: NSManagedObjectContext) -> Movie {
 		let movie = findOrCreate(id: remote.id, in: context)
 		movie.fill(remote)
 		return movie
 	}
 
-	func fill(_ remote: API.DiscoverResult) {
+	func fill(_ remote: API.Movie) {
 		title = remote.title
 		overview = remote.overview
 		poster = remote.poster_path

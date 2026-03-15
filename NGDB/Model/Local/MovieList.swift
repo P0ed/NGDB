@@ -6,6 +6,10 @@ extension MovieList {
 		findOrCreate("discover", in: context)
 	}
 
+	static func search(in context: NSManagedObjectContext) -> MovieList {
+		findOrCreate("search", in: context)
+	}
+
 	static func findOrCreate(_ uid: String, in context: NSManagedObjectContext) -> MovieList {
 		let list = MovieList.find(.equals(\MovieList.uid, uid), in: context)
 
@@ -37,15 +41,20 @@ extension MovieList {
 	func load(using api: API) async throws {
 		guard !isComplete else { return }
 
-		let response = try await api.discover(Int(page + 1))
-		try await performBackgroundTask { [ref] context in
+		let response = if let query {
+			try await api.search(query)
+		} else {
+			try await api.discover(Int(page) + 1)
+		}
+		try await performBackgroundTask { [ref, query] context in
 			let list = ref.deref(in: context)
+			if query != .none { list.reset() }
 			try list.fill(response)
 			try context.save()
 		}
 	}
 
-	private func fill(_ remote: API.Discover) throws {
+	private func fill(_ remote: API.List) throws {
 		let context = try unwrap(managedObjectContext)
 
 		page = Int32(remote.page)

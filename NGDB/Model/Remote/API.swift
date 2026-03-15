@@ -1,6 +1,7 @@
 struct API {
-	var discover: (Int) async throws -> Discover
-	var details: (Int) async throws -> DiscoverResult
+	var discover: (Int) async throws -> List
+	var search: (String) async throws -> List
+	var details: (Int) async throws -> Movie
 }
 
 /// API implementation
@@ -12,6 +13,9 @@ extension API {
 		return API(
 			discover: { page in
 				try await session.get(url: .discover, args: ["page": "\(page)"])
+			},
+			search: { query in
+				try await session.get(url: .search, args: ["query": query])
 			},
 			details: { id in
 				try await session.get(url: .details(id))
@@ -26,14 +30,14 @@ extension API {
 		var message: String
 	}
 
-	struct Discover: Decodable {
+	struct List: Decodable {
 		var page: Int
 		var total_pages: Int
 		var total_results: Int
-		var results: [DiscoverResult]
+		var results: [Movie]
 	}
 
-	struct DiscoverResult: Decodable {
+	struct Movie: Decodable {
 		var id: Int
 		var title: String
 		var adult: Bool

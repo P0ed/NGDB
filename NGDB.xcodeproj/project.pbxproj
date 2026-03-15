@@ -30,6 +30,8 @@
 		5FC653EF2F66FCAE0050147F /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC653EE2F66FCAB0050147F /* Movie.swift */; };
 		5FC653F12F6703640050147F /* MovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC653F02F6703600050147F /* MovieView.swift */; };
 		5FC653F32F6741230050147F /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC653F22F6741220050147F /* Colors.swift */; };
+		5FC653F52F6765040050147F /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC653F42F6765010050147F /* SearchView.swift */; };
+		5FC653F72F676CB50050147F /* UnauthorizedPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC653F62F676CB50050147F /* UnauthorizedPlaceholder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +59,8 @@
 		5FC653EE2F66FCAB0050147F /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		5FC653F02F6703600050147F /* MovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieView.swift; sourceTree = "<group>"; };
 		5FC653F22F6741220050147F /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		5FC653F42F6765010050147F /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		5FC653F62F676CB50050147F /* UnauthorizedPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnauthorizedPlaceholder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,10 +119,12 @@
 			isa = PBXGroup;
 			children = (
 				5F87C7C92F5F2C26006ECC78 /* DiscoverView.swift */,
+				5FC653F42F6765010050147F /* SearchView.swift */,
 				5F2ED6CD2F644AA10092149C /* InfiniteList.swift */,
 				5F2ED6D12F6458AB0092149C /* MovieCell.swift */,
 				5FC653F02F6703600050147F /* MovieView.swift */,
 				5FC653EA2F66E6710050147F /* UserView.swift */,
+				5FC653F62F676CB50050147F /* UnauthorizedPlaceholder.swift */,
 				5FC653F22F6741220050147F /* Colors.swift */,
 			);
 			path = View;
@@ -233,6 +239,7 @@
 				5F2ED6CE2F644AA40092149C /* InfiniteList.swift in Sources */,
 				5F87C7D72F5F2E13006ECC78 /* URL.swift in Sources */,
 				5F87C7D52F5F2DAE006ECC78 /* Errors.swift in Sources */,
+				5FC653F72F676CB50050147F /* UnauthorizedPlaceholder.swift in Sources */,
 				5F2ED6CA2F6449200092149C /* UserDefault.swift in Sources */,
 				5F87C7D92F5F2E49006ECC78 /* Functions.swift in Sources */,
 				5F87C7D32F5F2D5D006ECC78 /* NetworkSession.swift in Sources */,
@@ -241,6 +248,7 @@
 				5F2ED6D22F6458AB0092149C /* MovieCell.swift in Sources */,
 				5F87C7CD2F5F2C26006ECC78 /* DiscoverView.swift in Sources */,
 				5FC653E72F66E16F0050147F /* Predicates.swift in Sources */,
+				5FC653F52F6765040050147F /* SearchView.swift in Sources */,
 				5F2ED6CC2F6449240092149C /* User.swift in Sources */,
 				5F87C7DB2F5F2FF7006ECC78 /* API.swift in Sources */,
 				5FC653EF2F66FCAE0050147F /* Movie.swift in Sources */,

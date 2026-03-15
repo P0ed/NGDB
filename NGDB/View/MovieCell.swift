@@ -10,6 +10,7 @@ struct MovieCell: View {
 		HStack(alignment: .center) {
 			if settings.loadImages, let url = movie.posterURL {
 				AsyncImage(url: url, transaction: .init(animation: .easeInOut)) { phase in
+					// TODO: Retry on failure
 					phase.image?
 						.resizable()
 						.scaledToFit()

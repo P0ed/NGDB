@@ -14,13 +14,17 @@ struct NGDBApp: App {
     var body: some Scene {
         WindowGroup {
 			TabView {
-				Tab("Discover", systemImage: "list.bullet.circle.fill") {
+				Tab("Discover", systemImage: "list.bullet.circle") {
 					DiscoverView(list: .discover(in: .main))
 				}
-				Tab("Account", systemImage: "person.crop.circle.fill") {
+				Tab("Account", systemImage: "person.crop.circle") {
 					UserView(user: $user, settings: $settings)
 				}
+				Tab(role: .search) {
+					SearchView(list: .search(in: .main))
+				}
 			}
+			.tint(.primary)
         }
 		.environment(\.managedObjectContext, .main)
 		.environment(\.user, user)

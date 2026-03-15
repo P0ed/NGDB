@@ -3,7 +3,6 @@ import SwiftUI
 struct PaginatedList<Items: RandomAccessCollection, Content: View>: View
 where Items.Element: Identifiable {
 	var items: Items
-	@Binding var selected: Items.Element?
 	var loadMore: () async throws -> Void
 	var content: (Items.Element) -> Content
 
@@ -18,9 +17,6 @@ where Items.Element: Identifiable {
 							if !settings.lowDataMode, item.id == items.last?.id {
 								Task { try await loadMore() }
 							}
-						}
-						.onTapGesture {
-							selected = item
 						}
 				}
 			}
