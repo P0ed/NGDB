@@ -91,7 +91,7 @@ struct UserView: View {
 	}
 
 	func signOut() {
-		user = User()
+		user.apiKey = .none
 		PersistenceController.shared.reset()
 	}
 }
