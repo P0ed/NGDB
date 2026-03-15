@@ -26,7 +26,7 @@ extension MovieList {
 	}
 
 	@MainActor
-	func load() async throws {
+	func load(using api: API) async throws {
 		guard !isComplete else { return }
 
 		page += 1

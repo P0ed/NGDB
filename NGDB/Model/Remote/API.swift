@@ -1,6 +1,3 @@
-@MainActor
-let api = API.main
-
 struct API {
 	var discover: (Int) async throws -> Discover
 }
@@ -8,8 +5,8 @@ struct API {
 /// API implementation
 extension API {
 
-	static var main: API {
-		let session = NetworkSession.urlSession
+	static func main(apiKey: String?) -> API {
+		let session = NetworkSession.urlSession(apiKey: apiKey)
 
 		return API(
 			discover: { page in

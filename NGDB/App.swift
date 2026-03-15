@@ -25,5 +25,6 @@ struct NGDBApp: App {
 		.environment(\.managedObjectContext, .main)
 		.environment(\.user, user)
 		.environment(\.settings, settings)
+		.environment(\.api, .main(apiKey: user.apiKey))
     }
 }

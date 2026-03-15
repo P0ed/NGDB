@@ -1,9 +1,12 @@
 import SwiftUI
 
-struct PaginatedList<Items: RandomAccessCollection, Content: View>: View where Items.Element: Identifiable {
-	let items: Items
-	let loadMore: () async throws -> Void
-	let content: (Items.Element) -> Content
+struct PaginatedList<Items: RandomAccessCollection, Content: View>: View
+where Items.Element: Identifiable {
+	var items: Items
+	var loadMore: () async throws -> Void
+	var content: (Items.Element) -> Content
+
+	@Environment(\.settings) var settings
 
 	var body: some View {
 		ScrollView {
@@ -11,7 +14,7 @@ struct PaginatedList<Items: RandomAccessCollection, Content: View>: View where I
 				ForEach(items) { item in
 					content(item)
 						.onAppear {
-							if item.id == items.last?.id {
+							if !settings.lowDataMode, item.id == items.last?.id {
 								Task { try await loadMore() }
 							}
 						}

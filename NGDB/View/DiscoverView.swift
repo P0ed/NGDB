@@ -7,6 +7,7 @@ struct DiscoverView: View {
 	@Environment(\.managedObjectContext) private var modelContext
 	@Environment(\.user) private var user
 	@Environment(\.settings) private var settings
+	@Environment(\.api) private var api
 	@FetchRequest private var indices: FetchedResults<MovieIndex>
 
 	init(list: MovieList) {
@@ -24,7 +25,9 @@ struct DiscoverView: View {
 			NavigationSplitView {
 				PaginatedList(
 					items: indices.compactMap(\.movie),
-					loadMore: { [list = list.ref] in try await list.onMain.load() },
+					loadMore: { [list = list.ref] in
+						try await list.onMain.load(using: api)
+					},
 					content: MovieCell.init
 				)
 			} detail: {
