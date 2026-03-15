@@ -31,7 +31,7 @@ extension MovieList {
 	var typedIndices: Set<MovieIndex> { indices as? Set<MovieIndex> ?? [] }
 
 	func reset(saving: Bool = false) {
-		query = ""
+		query = .none
 		page = 0
 		totalPages = 0
 		updatedAt = .distantPast
