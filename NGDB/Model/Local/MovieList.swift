@@ -57,7 +57,6 @@ extension MovieList {
 	}
 
 	private func fill(_ remote: API.List) throws {
-		print("filling \(uid, default: "<unknown>")")
 		let context = try unwrap(managedObjectContext)
 
 		page = Int32(remote.page)
