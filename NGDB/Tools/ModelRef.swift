@@ -6,8 +6,6 @@ struct ModelRef<A: NSManagedObject>: Sendable, Hashable {
 	func deref(in ctx: NSManagedObjectContext) -> A {
 		ctx.object(with: id) as! A
 	}
-
-	@MainActor var onMain: A { deref(in: .main) }
 }
 
 protocol ManagedObjectProtocol: NSManagedObject {}

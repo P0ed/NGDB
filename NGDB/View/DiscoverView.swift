@@ -34,6 +34,7 @@ struct DiscoverView: View {
 						NavigationLink(value: movie) {
 							MovieCell(movie: movie)
 						}
+						.buttonStyle(PlainButtonStyle())
 					}
 				)
 				.navigationDestination(for: Movie.self) { movie in

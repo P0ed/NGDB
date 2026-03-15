@@ -16,13 +16,15 @@ struct MovieCell: View {
 				}
 				.frame(width: 88.0)
 			}
-			VStack(alignment: .leading, spacing: 12.0) {
+			VStack(alignment: .leading) {
 				Text(movie.title ?? "")
 					.font(.headline)
 					.multilineTextAlignment(.leading)
+					.padding(.bottom, 8.0)
 				Text(movie.overview ?? "")
 					.font(.footnote)
 					.multilineTextAlignment(.leading)
+				Spacer(minLength: 0)
 			}
 			Spacer()
 		}
