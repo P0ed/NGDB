@@ -30,11 +30,13 @@ extension MovieList {
 
 	var typedIndices: Set<MovieIndex> { indices as? Set<MovieIndex> ?? [] }
 
-	func reset() {
+	func reset(saving: Bool = false) {
+		query = ""
 		page = 0
 		totalPages = 0
 		updatedAt = .distantPast
 		indices = []
+		if saving { try? managedObjectContext?.save() }
 	}
 
 	@MainActor
@@ -55,6 +57,7 @@ extension MovieList {
 	}
 
 	private func fill(_ remote: API.List) throws {
+		print("filling \(uid, default: "<unknown>")")
 		let context = try unwrap(managedObjectContext)
 
 		page = Int32(remote.page)

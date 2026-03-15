@@ -41,5 +41,12 @@ struct DiscoverView: View {
 				UnauthorizedPlaceholder()
 			}
 		}
+		.onAppear {
+			if list.isOutdated {
+				list.reset()
+				try? list.managedObjectContext?.save()
+				Task { try await list.load(using: api) }
+			}
+		}
 	}
 }

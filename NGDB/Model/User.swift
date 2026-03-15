@@ -4,5 +4,4 @@ struct User: Codable {
 
 struct Settings: Codable {
 	var loadImages: Bool = true
-	var lowDataMode: Bool = false
 }

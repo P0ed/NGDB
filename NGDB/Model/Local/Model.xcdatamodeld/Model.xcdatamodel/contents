@@ -7,7 +7,7 @@
         <attribute name="releaseDate" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="uid" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="indices" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="MovieIndex" inverseName="movie" inverseEntity="MovieIndex"/>
+        <relationship name="indices" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MovieIndex" inverseName="movie" inverseEntity="MovieIndex"/>
     </entity>
     <entity name="MovieIndex" representedClassName="MovieIndex" syncable="YES" codeGenerationType="class">
         <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>

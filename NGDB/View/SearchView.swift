@@ -43,9 +43,9 @@ struct SearchView: View {
 			}
 		}
 		.searchable(text: $query)
-		.onAppear {
+		.onDisappear {
 			query = ""
-			list.reset()
+			list.reset(saving: true)
 		}
 		.onChange(of: query) { oldValue, newValue in
 			list.query = newValue
