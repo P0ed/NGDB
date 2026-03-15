@@ -15,7 +15,7 @@ struct NGDBApp: App {
         WindowGroup {
 			TabView {
 				Tab("Discover", systemImage: "list.bullet.circle.fill") {
-					DiscoverView(list: .main(in: .main))
+					DiscoverView(list: .discover(in: .main))
 				}
 				Tab("Account", systemImage: "person.crop.circle.fill") {
 					UserView(user: $user, settings: $settings)

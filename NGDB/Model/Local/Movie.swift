@@ -31,8 +31,12 @@ extension Movie {
 		poster.flatMap { path in .image(path: path) }
 	}
 
+	@MainActor
 	func load(using api: API) async throws {
 		let remote = try await api.details(Int(uid))
-		fill(remote)
+
+		try await performBackgroundTask { [ref] context in
+			ref.deref(in: context).fill(remote)
+		}
 	}
 }

@@ -28,7 +28,7 @@ struct DiscoverView: View {
 					items: indices.compactMap(\.movie),
 					selected: $selected,
 					loadMore: { [list = list.ref] in
-						try await list.onMain.load(using: api)
+						try await list.deref(in: .main).load(using: api)
 					},
 					content: { movie in
 						NavigationLink(value: movie) {

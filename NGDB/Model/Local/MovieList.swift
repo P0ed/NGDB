@@ -2,8 +2,8 @@ import CoreData
 
 extension MovieList {
 
-	static func main(in context: NSManagedObjectContext) -> MovieList {
-		findOrCreate("mian", in: context)
+	static func discover(in context: NSManagedObjectContext) -> MovieList {
+		findOrCreate("discover", in: context)
 	}
 
 	static func findOrCreate(_ uid: String, in context: NSManagedObjectContext) -> MovieList {
@@ -35,21 +35,20 @@ extension MovieList {
 
 	@MainActor
 	func load(using api: API) async throws {
-		guard !isComplete, let managedObjectContext else { return }
+		guard !isComplete else { return }
 
-		page += 1
-		do {
-			let response = try await api.discover(Int(page))
-			try fill(response)
-			try managedObjectContext.save()
-		} catch {
-			print(error)
+		let response = try await api.discover(Int(page + 1))
+		try await performBackgroundTask { [ref] context in
+			let list = ref.deref(in: context)
+			try list.fill(response)
+			try context.save()
 		}
 	}
 
 	private func fill(_ remote: API.Discover) throws {
 		let context = try unwrap(managedObjectContext)
 
+		page = Int32(remote.page)
 		updatedAt = .now
 		totalPages = Int32(remote.total_pages)
 

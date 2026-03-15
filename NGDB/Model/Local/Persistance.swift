@@ -21,7 +21,7 @@ struct PersistenceController {
 	@MainActor
 	func reset() {
 		let ctx = NSManagedObjectContext.main
-		MovieList.fetch(in: ctx).forEach(ctx.delete)
+		MovieList.discover(in: ctx).reset()
 		Movie.fetch(in: ctx).forEach(ctx.delete)
 		try? ctx.save()
 	}
@@ -32,5 +32,22 @@ extension NSManagedObjectContext {
 
 	static var main: NSManagedObjectContext {
 		PersistenceController.shared.container.viewContext
+	}
+}
+
+func performBackgroundTask(
+	_ body: @Sendable @escaping (NSManagedObjectContext) throws -> Void
+) async throws {
+	let container = PersistenceController.shared.container
+
+	try await withCheckedThrowingContinuation { continuation in
+		container.performBackgroundTask { context in
+			do {
+				try body(context)
+				continuation.resume()
+			} catch {
+				continuation.resume(throwing: error)
+			}
+		}
 	}
 }

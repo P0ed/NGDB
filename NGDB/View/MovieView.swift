@@ -7,29 +7,25 @@ struct MovieView: View {
 
 	var body: some View {
 		ScrollView {
-			VStack {
+			VStack(alignment: .leading, spacing: 24.0) {
 				if let url = movie.posterURL {
-					AsyncImage(url: url) { result in
-						result.image?
+					AsyncImage(url: url) { phase in
+						phase.image?
 							.resizable()
-							.scaledToFill()
+							.scaledToFit()
 					}
 				}
 
 				if let text = movie.overview {
 					Text(text)
+						.multilineTextAlignment(.leading)
 				}
 			}
 			.padding()
 		}
 		.navigationTitle(movie.title ?? "#\(movie.uid)")
-		.task { @MainActor [api, movie = movie.ref] in
-			try? await movie.onMain.load(using: api)
+		.task { [api, movie = movie.ref] in
+			try? await movie.deref(in: .main).load(using: api)
 		}
-//		.onAppear { [api] in
-//			Task {
-//				try await { @MainActor in  }()
-//			}
-//		}
 	}
 }

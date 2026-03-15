@@ -7,18 +7,27 @@ struct MovieCell: View {
 	@Environment(\.settings) var settings
 
 	var body: some View {
-		HStack {
+		HStack(alignment: .center) {
 			if settings.loadImages, let url = movie.posterURL {
-				AsyncImage(url: url) { result in
-					result.image?
+				AsyncImage(url: url, transaction: .init(animation: .easeInOut)) { phase in
+					phase.image?
 						.resizable()
-						.scaledToFill()
+						.scaledToFit()
 				}
-				.frame(maxWidth: 64.0)
+				.frame(width: 88.0)
 			}
-			Text(movie.title ?? "")
+			VStack(alignment: .leading, spacing: 12.0) {
+				Text(movie.title ?? "")
+					.font(.headline)
+					.multilineTextAlignment(.leading)
+				Text(movie.overview ?? "")
+					.font(.footnote)
+					.multilineTextAlignment(.leading)
+			}
 			Spacer()
 		}
-		.padding()
+		.frame(height: 128.0)
+		.padding(.horizontal, 12.0)
+		.padding(.vertical, 4.0)
 	}
 }

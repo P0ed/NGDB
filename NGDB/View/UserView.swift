@@ -15,12 +15,11 @@ struct UserView: View {
 					section("User") {
 						userInfo
 					}
-					Divider()
 					section("Settings") {
 						Toggle("Load images", isOn: $settings.loadImages)
-							.padding(.vertical)
+							.padding(.vertical, 4.0)
 						Toggle("Low data mode", isOn: $settings.lowDataMode)
-							.padding(.vertical)
+							.padding(.vertical, 4.0)
 					}
 				}
 				.padding()
@@ -52,15 +51,13 @@ struct UserView: View {
 		if user.apiKey != .none {
 			ToolbarItem(placement: .topBarTrailing) {
 				Button("Sign out", systemImage: "door.left.hand.open") {
-					user = User()
-					PersistenceController.shared.reset()
+					signOut()
 				}
 			}
 		} else {
 			ToolbarItem(placement: .topBarTrailing) {
 				Button("Sign in", systemImage: "door.left.hand.closed") {
-					apiKey = ""
-					signInPresented = true
+					signIn()
 				}
 			}
 		}
@@ -82,10 +79,22 @@ struct UserView: View {
 					}
 				}
 			} else {
-				Text("<none>")
+				Button("<none>") {
+					signIn()
+				}
 			}
 		}
 		.padding(.vertical)
+	}
+
+	func signIn() {
+		apiKey = ""
+		signInPresented = true
+	}
+
+	func signOut() {
+		user = User()
+		PersistenceController.shared.reset()
 	}
 }
 
