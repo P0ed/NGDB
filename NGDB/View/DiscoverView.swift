@@ -1,36 +1,33 @@
 import SwiftUI
-import SwiftData
+import CoreData
 
 struct DiscoverView: View {
-	@Environment(\.modelContext) private var modelContext
-	@Environment(\.user) private var user
-
 	var list: MovieList
 
-	@Query private var indices: [MovieIndex]
-	private var movies: [Movie] { indices.compactMap(\.movie) }
+	@Environment(\.managedObjectContext) private var modelContext
+	@Environment(\.user) private var user
+	@Environment(\.settings) private var settings
+	@FetchRequest private var indices: FetchedResults<MovieIndex>
 
 	init(list: MovieList) {
 		self.list = list
 
-		let id = list.identifier
-		_indices = Query(
-			filter: #Predicate<MovieIndex> { idx in
-				idx.movie != nil && idx.list?.identifier == id
-			},
-			sort: [.init(\.index, order: .forward)]
+		_indices = FetchRequest(
+			sortDescriptors: [.init(keyPath: \MovieIndex.index, ascending: true)],
+			predicate: .equals(\.objectID, list.objectID),
+			animation: .default
 		)
 	}
 
-    var body: some View {
+	var body: some View {
 		NavigationSplitView {
 			InfiniteList(
-				items: movies,
-				loadMore: { try await list.load() },
-				content: { item in Text(item.title) }
+				items: indices.compactMap(\.movie),
+				loadMore: { [list = list.ref] in try await list.onMain.load() },
+				content: MovieCell.init
 			)
 		} detail: {
-			Text("Select an item")
+			Text("Select a movie")
 		}
-    }
+	}
 }

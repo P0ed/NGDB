@@ -1,18 +1,22 @@
 import SwiftUI
-import SwiftData
+import CoreData
 
 @main
 struct NGDBApp: App {
-	var modelContainer: ModelContainer = .movies
+	var persistenceController: PersistenceController = .shared
 
 	@UserDefault(default: User())
 	var user: User
 
+	@UserDefault(default: Settings())
+	var settings: Settings
+
     var body: some Scene {
         WindowGroup {
-			DiscoverView(list: .main(in: modelContainer.mainContext))
+			DiscoverView(list: .main(in: .main))
         }
-        .modelContainer(modelContainer)
+		.environment(\.managedObjectContext, .main)
 		.environment(\.user, user)
+		.environment(\.settings, settings)
     }
 }
