@@ -23,6 +23,26 @@ extension API {
 	}
 
 	struct Discover: Decodable {
+		var page: Int
+		var total_pages: Int
+		var total_results: Int
+		var results: [DiscoverResult]
+	}
 
+	struct DiscoverResult: Decodable {
+		var id: Int
+		var title: String
+		var adult: Bool
+		var backdrop_path: String?
+		var genre_ids: [Int]
+		var original_language: String
+		var original_title: String
+		var overview: String
+		var popularity: Float
+		var poster_path: String?
+		var release_date: String
+		var vote_average: Float
+		var vote_count: Int
+		var video: Bool
 	}
 }

@@ -27,6 +27,7 @@
 		5FC653E92F66E1980050147F /* OptionalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC653E82F66E1980050147F /* OptionalType.swift */; };
 		5FC653EB2F66E6750050147F /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC653EA2F66E6710050147F /* UserView.swift */; };
 		5FC653ED2F66F2F10050147F /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC653EC2F66F2EE0050147F /* Environment.swift */; };
+		5FC653EF2F66FCAE0050147F /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC653EE2F66FCAB0050147F /* Movie.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		5FC653E82F66E1980050147F /* OptionalType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalType.swift; sourceTree = "<group>"; };
 		5FC653EA2F66E6710050147F /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		5FC653EC2F66F2EE0050147F /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		5FC653EE2F66FCAB0050147F /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				5FC653E02F66DC120050147F /* Persistance.swift */,
 				5FC653E62F66E1690050147F /* Predicates.swift */,
 				5F87C7DE2F5F449E006ECC78 /* MovieList.swift */,
+				5FC653EE2F66FCAB0050147F /* Movie.swift */,
 			);
 			path = Local;
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 				5FC653E72F66E16F0050147F /* Predicates.swift in Sources */,
 				5F2ED6CC2F6449240092149C /* User.swift in Sources */,
 				5F87C7DB2F5F2FF7006ECC78 /* API.swift in Sources */,
+				5FC653EF2F66FCAE0050147F /* Movie.swift in Sources */,
 				5F2ED6D02F644FF90092149C /* ModelRef.swift in Sources */,
 				5FC653ED2F66F2F10050147F /* Environment.swift in Sources */,
 				5FC653E12F66DC170050147F /* Persistance.swift in Sources */,

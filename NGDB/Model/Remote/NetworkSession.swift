@@ -25,21 +25,11 @@ extension NetworkSession {
 		}
 	}
 
-	func request<Body: Encodable>(
+	private func request<Body: Encodable>(
 		method: String = "GET",
 		url: URL,
 		args: [String: String] = [:],
 		body: Body? = Data?.none
-	) async throws -> Response {
-		try await _request(method: method, url: url, args: args, body: body)
-	}
-
-	private func _request<Body: Encodable>(
-		method: String = "GET",
-		url: URL,
-		args: [String: String] = [:],
-		body: Body? = Data?.none,
-		retry: Int = 0
 	) async throws -> Response {
 		var request = URLRequest(
 			url: url.modifying { cpts in

@@ -1,5 +1,3 @@
-import SwiftUI
-
 struct User: Codable {
 	var apiKey: String?
 }
