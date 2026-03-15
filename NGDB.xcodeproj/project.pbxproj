@@ -25,6 +25,7 @@
 		5FC653E52F66DC570050147F /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5FC653E32F66DC570050147F /* Model.xcdatamodeld */; };
 		5FC653E72F66E16F0050147F /* Predicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC653E62F66E1690050147F /* Predicates.swift */; };
 		5FC653E92F66E1980050147F /* OptionalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC653E82F66E1980050147F /* OptionalType.swift */; };
+		5FC653EB2F66E6750050147F /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC653EA2F66E6710050147F /* UserView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		5FC653E42F66DC570050147F /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		5FC653E62F66E1690050147F /* Predicates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Predicates.swift; sourceTree = "<group>"; };
 		5FC653E82F66E1980050147F /* OptionalType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalType.swift; sourceTree = "<group>"; };
+		5FC653EA2F66E6710050147F /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				5F87C7C92F5F2C26006ECC78 /* DiscoverView.swift */,
 				5F2ED6D12F6458AB0092149C /* MovieCell.swift */,
 				5F2ED6CD2F644AA10092149C /* InfiniteList.swift */,
+				5FC653EA2F66E6710050147F /* UserView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -220,6 +223,7 @@
 				5F2ED6CA2F6449200092149C /* UserDefault.swift in Sources */,
 				5F87C7D92F5F2E49006ECC78 /* Functions.swift in Sources */,
 				5F87C7D32F5F2D5D006ECC78 /* NetworkSession.swift in Sources */,
+				5FC653EB2F66E6750050147F /* UserView.swift in Sources */,
 				5FC653E52F66DC570050147F /* Model.xcdatamodeld in Sources */,
 				5F2ED6D22F6458AB0092149C /* MovieCell.swift in Sources */,
 				5F87C7CD2F5F2C26006ECC78 /* DiscoverView.swift in Sources */,

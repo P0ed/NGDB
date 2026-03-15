@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct InfiniteList<Items: RandomAccessCollection, Content: View>: View where Items.Element: Identifiable {
+struct PaginatedList<Items: RandomAccessCollection, Content: View>: View where Items.Element: Identifiable {
 	let items: Items
 	let loadMore: () async throws -> Void
 	let content: (Items.Element) -> Content

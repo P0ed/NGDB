@@ -14,20 +14,24 @@ struct DiscoverView: View {
 
 		_indices = FetchRequest(
 			sortDescriptors: [.init(keyPath: \MovieIndex.index, ascending: true)],
-			predicate: .equals(\.objectID, list.objectID),
+			predicate: .equals(\MovieIndex.list?.uid, list.uid ?? ""),
 			animation: .default
 		)
 	}
 
 	var body: some View {
-		NavigationSplitView {
-			InfiniteList(
-				items: indices.compactMap(\.movie),
-				loadMore: { [list = list.ref] in try await list.onMain.load() },
-				content: MovieCell.init
-			)
-		} detail: {
-			Text("Select a movie")
+		if user.apiKey != nil {
+			NavigationSplitView {
+				PaginatedList(
+					items: indices.compactMap(\.movie),
+					loadMore: { [list = list.ref] in try await list.onMain.load() },
+					content: MovieCell.init
+				)
+			} detail: {
+				Text("Select a movie")
+			}
+		} else {
+			Text("Movies will appear here")
 		}
 	}
 }

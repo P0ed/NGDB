@@ -10,15 +10,15 @@ struct ModelRef<A: NSManagedObject>: Sendable, Hashable {
 	@MainActor var onMain: A { deref(in: .main) }
 }
 
-protocol NSManagedObjectProtocol: NSManagedObject {}
+protocol ManagedObjectProtocol: NSManagedObject {}
 
-extension NSManagedObject: NSManagedObjectProtocol {}
+extension NSManagedObject: ManagedObjectProtocol {}
 
-extension NSManagedObjectProtocol {
+extension ManagedObjectProtocol {
 	var ref: ModelRef<Self> { .init(id: objectID) }
 }
 
-extension NSManagedObjectProtocol {
+extension ManagedObjectProtocol {
 
 	static func createRequest(predicate: NSPredicate? = nil, sort: [NSSortDescriptor] = [], limit: Int = 0) -> NSFetchRequest<Self> {
 		let request = NSFetchRequest<Self>(entityName: "\(self)")

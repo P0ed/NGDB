@@ -1,5 +1,4 @@
 import CoreData
-import Foundation
 
 extension MovieList {
 
