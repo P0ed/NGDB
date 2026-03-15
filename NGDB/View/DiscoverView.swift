@@ -23,6 +23,7 @@ struct DiscoverView: View {
 		NavigationStack {
 			if user.apiKey != .none {
 				PaginatedList(
+					// TODO: Remove compactMap as it defeats the purpose of indices being random access collection
 					items: indices.compactMap(\.movie),
 					loadMore: { [list = list.ref] in
 						try await list.deref(in: .main).load(using: api)
