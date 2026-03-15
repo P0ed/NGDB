@@ -4,6 +4,7 @@ import CoreData
 struct DiscoverView: View {
 	var list: MovieList
 
+	@State var selected: Movie?
 	@Environment(\.managedObjectContext) private var modelContext
 	@Environment(\.user) private var user
 	@Environment(\.settings) private var settings
@@ -25,16 +26,21 @@ struct DiscoverView: View {
 			NavigationSplitView {
 				PaginatedList(
 					items: indices.compactMap(\.movie),
+					selected: $selected,
 					loadMore: { [list = list.ref] in
 						try await list.onMain.load(using: api)
 					},
 					content: MovieCell.init
 				)
 			} detail: {
-				Text("Select a movie")
+				if let selected {
+					MovieView(movie: selected)
+				} else {
+					Text("Select a movie")
+				}
 			}
 		} else {
-			Text("Movies will appear here")
+			Text("Movies will appear here after providing API key")
 		}
 	}
 }
