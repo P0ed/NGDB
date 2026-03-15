@@ -22,25 +22,25 @@ struct DiscoverView: View {
 	}
 
 	var body: some View {
-		if user.apiKey != nil {
-			NavigationSplitView {
+		NavigationSplitView {
+			if user.apiKey != .none {
 				PaginatedList(
 					items: indices.compactMap(\.movie),
 					selected: $selected,
 					loadMore: { [list = list.ref] in
 						try await list.onMain.load(using: api)
 					},
-					content: MovieCell.init
+					content: { movie in MovieCell(movie: movie) }
 				)
-			} detail: {
-				if let selected {
-					MovieView(movie: selected)
-				} else {
-					Text("Select a movie")
-				}
+			} else {
+				Text("Movies will appear here after providing API key")
 			}
-		} else {
-			Text("Movies will appear here after providing API key")
+		} detail: {
+			if let selected {
+				MovieView(movie: selected)
+			} else {
+				Text("Select a movie")
+			}
 		}
 	}
 }

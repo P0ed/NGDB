@@ -4,7 +4,16 @@ import CoreData
 struct MovieCell: View {
 	var movie: Movie
 
+	@Environment(\.settings) var settings
+
 	var body: some View {
-		Text(movie.title ?? "")
+		HStack {
+			if settings.loadImages {
+//				Image(url: "")
+			}
+			Text(movie.title ?? "")
+			Spacer()
+		}
+		.padding()
 	}
 }
