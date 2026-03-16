@@ -3,22 +3,21 @@ import CoreData
 extension MovieList {
 
 	static func discover(in context: NSManagedObjectContext) -> MovieList {
-		findOrCreate("discover", in: context)
+		with(findOrCreate("discover", in: context)) { _ in
+			if context.hasChanges { try? context.save() }
+		}
 	}
 
 	static func search(in context: NSManagedObjectContext) -> MovieList {
-		findOrCreate("search", in: context)
+		with(findOrCreate("search", in: context)) { _ in
+			if context.hasChanges { try? context.save() }
+		}
 	}
 
 	static func findOrCreate(_ uid: String, in context: NSManagedObjectContext) -> MovieList {
-		let list = MovieList.find(.equals(\MovieList.uid, uid), in: context)
-
-		if let list {
-			return list
-		} else {
-			let list = MovieList(context: context)
+		.find(.equals(\MovieList.uid, uid), in: context)
+		?? with(MovieList(context: context)) { list in
 			list.uid = uid
-			return list
 		}
 	}
 

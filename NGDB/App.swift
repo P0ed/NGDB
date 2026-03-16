@@ -15,7 +15,7 @@ struct NGDBApp: App {
         WindowGroup {
 			TabView {
 				Tab("Discover", systemImage: "list.bullet.circle") {
-					DiscoverView(list: .discover(in: .main))
+					DiscoverView(list: .discover(in: modelContainer.viewContext))
 				}
 				Tab("Favourites", systemImage: "star") {
 					FavouritesView()
@@ -24,7 +24,7 @@ struct NGDBApp: App {
 					UserView(user: $user, settings: $settings)
 				}
 				Tab(role: .search) {
-					SearchView(list: .search(in: .main))
+					SearchView(list: .search(in: modelContainer.viewContext))
 				}
 			}
 			.tint(.secondary)

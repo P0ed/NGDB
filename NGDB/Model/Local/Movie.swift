@@ -3,14 +3,9 @@ import CoreData
 extension Movie {
 
 	static func findOrCreate(id: Int, in context: NSManagedObjectContext) -> Movie {
-		let movie = Movie.find(.equals(\Movie.uid, Int64(id)), in: context)
-
-		if let movie {
-			return movie
-		} else {
-			let movie = Movie(context: context)
+		.find(.equals(\Movie.uid, Int64(id)), in: context)
+		?? with(Movie(context: context)) { movie in
 			movie.uid = Int64(id)
-			return movie
 		}
 	}
 

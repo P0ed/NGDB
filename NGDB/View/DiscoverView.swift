@@ -2,11 +2,10 @@ import SwiftUI
 import CoreData
 
 struct DiscoverView: View {
-	var list: MovieList
+	@ObservedObject var list: MovieList
 
 	@FetchRequest private var indices: FetchedResults<MovieIndex>
 
-	@Environment(\.managedObjectContext) private var modelContext
 	@Environment(\.user) private var user
 	@Environment(\.api) private var api
 
@@ -18,7 +17,7 @@ struct DiscoverView: View {
 	var body: some View {
 		NavigationStack {
 			if user.apiKey != .none {
-				List(
+				InfiniteList(
 					items: indices.randomAccessMap { $0.movie ?? Movie() },
 					shouldLoad: { !list.isComplete },
 					load: { try await list.load(using: api) },

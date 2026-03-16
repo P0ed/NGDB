@@ -4,8 +4,8 @@ import CoreData
 struct MovieView: View {
 	@ObservedObject var movie: Movie
 
-	@Environment(\.api) var api
-	@Environment(\.settings) var settings
+	@Environment(\.api) private var api
+	@Environment(\.settings) private var settings
 
 	var body: some View {
 		ScrollView {

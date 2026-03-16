@@ -4,13 +4,13 @@ struct UserView: View {
 	@Binding var user: User
 	@Binding var settings: Settings
 
-	@State var signInPresented: Bool = false
-	@State var apiKey: String = ""
-	@State var copied: Bool = false
+	@State private var signInPresented: Bool = false
+	@State private var apiKey: String = ""
+	@State private var copied: Bool = false
 
-	@FetchRequest(sortDescriptors: []) var movies: FetchedResults<Movie>
+	@FetchRequest(sortDescriptors: []) private var movies: FetchedResults<Movie>
 
-	@Environment(\.modelContainer) var modelContainer
+	@Environment(\.modelContainer) private var modelContainer
 
 	var body: some View {
 		NavigationStack {

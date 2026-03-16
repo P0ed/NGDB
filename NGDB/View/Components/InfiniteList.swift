@@ -1,13 +1,13 @@
 import SwiftUI
 
-struct List<Items: RandomAccessCollection, Content: View>: View
+struct InfiniteList<Items: RandomAccessCollection, Content: View>: View
 where Items.Element: Identifiable {
 	var items: Items
 	var shouldLoad: () -> Bool = { false }
 	var load: () async throws -> Void = {}
 	var content: (Items.Element) -> Content
 
-	@State var isLoading: Bool = false
+	@State private var isLoading: Bool = false
 
 	var body: some View {
 		ScrollView {

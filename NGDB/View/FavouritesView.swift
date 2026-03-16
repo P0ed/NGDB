@@ -17,7 +17,7 @@ struct FavouritesView: View {
 			if movies.isEmpty {
 				Text("Favourite movies will appear here")
 			} else {
-				List(
+				InfiniteList(
 					items: movies,
 					content: { movie in MovieCell(movie: movie) }
 				)

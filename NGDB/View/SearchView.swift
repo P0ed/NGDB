@@ -2,12 +2,11 @@ import SwiftUI
 import CoreData
 
 struct SearchView: View {
-	var list: MovieList
+	@ObservedObject var list: MovieList
 
 	@State private var query: String = ""
 	@FetchRequest private var indices: FetchedResults<MovieIndex>
 
-	@Environment(\.managedObjectContext) private var modelContext
 	@Environment(\.user) private var user
 	@Environment(\.api) private var api
 
@@ -19,7 +18,7 @@ struct SearchView: View {
 	var body: some View {
 		NavigationStack {
 			if user.apiKey != .none {
-				List(
+				InfiniteList(
 					items: indices.randomAccessMap { $0.movie ?? Movie() },
 					shouldLoad: { list.page == 0 && list.query != "" },
 					load: { try await list.load(using: api) },
