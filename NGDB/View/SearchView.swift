@@ -4,28 +4,24 @@ import CoreData
 struct SearchView: View {
 	var list: MovieList
 
-	@State var query: String = ""
+	@State private var query: String = ""
+	@FetchRequest private var indices: FetchedResults<MovieIndex>
+
 	@Environment(\.managedObjectContext) private var modelContext
 	@Environment(\.user) private var user
 	@Environment(\.api) private var api
-	@FetchRequest private var indices: FetchedResults<MovieIndex>
 
 	init(list: MovieList) {
 		self.list = list
-
-		_indices = FetchRequest(
-			sortDescriptors: [.init(keyPath: \MovieIndex.index, ascending: true)],
-			predicate: .equals(\MovieIndex.list?.uid, list.uid ?? ""),
-			animation: .default
-		)
+		_indices = .movies(list)
 	}
 
 	var body: some View {
 		NavigationStack {
 			if user.apiKey != .none {
 				PaginatedList(
-					items: indices.compactMap(\.movie),
-					loadMore: { [list = list.ref] in
+					items: indices.randomAccessMap { $0.movie ?? Movie() },
+					load: { [list = list.ref] in
 						try await list.deref(in: .main).load(using: api)
 					},
 					content: { movie in
@@ -43,14 +39,20 @@ struct SearchView: View {
 			}
 		}
 		.searchable(text: $query)
-		.onDisappear {
-			query = ""
-			list.reset(saving: true)
-		}
-		.onChange(of: query) { oldValue, newValue in
-			list.query = newValue
+		.onDisappear { reset() }
+		.onAppear { reset() }
+		.onChange(of: query) { _, query in
+			list.query = query
 			try? list.managedObjectContext?.save()
-			Task { try await list.load(using: api) }
+			if !query.isEmpty {
+				Task { try await list.load(using: api) }
+			}
 		}
+	}
+
+	private func reset() {
+		list.query = ""
+		list.reset(saving: true)
+		query = ""
 	}
 }

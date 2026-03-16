@@ -9,9 +9,8 @@ struct MovieCell: View {
 	var body: some View {
 		HStack(alignment: .center) {
 			if settings.loadImages, let url = movie.posterURL {
-				AsyncImage(url: url, transaction: .init(animation: .easeInOut)) { phase in
-					// TODO: Retry on failure
-					phase.image?
+				LazyImage(url: url) { image in
+					image
 						.resizable()
 						.scaledToFit()
 				}
@@ -32,5 +31,6 @@ struct MovieCell: View {
 		.frame(height: 128.0)
 		.padding(.horizontal, 12.0)
 		.padding(.vertical, 4.0)
+		.contentShape(Rectangle())
 	}
 }

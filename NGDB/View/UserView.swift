@@ -8,6 +8,10 @@ struct UserView: View {
 	@State var apiKey: String = ""
 	@State var copied: Bool = false
 
+	@FetchRequest(sortDescriptors: []) var movies: FetchedResults<Movie>
+
+	@Environment(\.modelContainer) var modelContainer
+
 	var body: some View {
 		NavigationStack {
 			ScrollView {
@@ -18,6 +22,9 @@ struct UserView: View {
 					section("Settings") {
 						Toggle("Load images", isOn: $settings.loadImages)
 							.padding(.vertical, 4.0)
+					}
+					section("Data") {
+						resetView
 					}
 				}
 				.padding()
@@ -45,7 +52,7 @@ struct UserView: View {
 	}
 
 	@ToolbarContentBuilder
-	var toolbar: some ToolbarContent {
+	private var toolbar: some ToolbarContent {
 		if user.apiKey != .none {
 			ToolbarItem(placement: .topBarTrailing) {
 				Button("Sign out", systemImage: "door.left.hand.open") {
@@ -61,7 +68,7 @@ struct UserView: View {
 		}
 	}
 
-	var userInfo: some View {
+	private var userInfo: some View {
 		HStack {
 			Text("API key:")
 			Spacer()
@@ -85,14 +92,27 @@ struct UserView: View {
 		.padding(.vertical)
 	}
 
-	func signIn() {
+	@ViewBuilder
+	private var resetView: some View {
+		if movies.isEmpty {
+			Text("Database is empty")
+				.padding(.vertical, 4.0)
+		} else {
+			Button("Delete \(movies.count) movies") {
+				modelContainer.reset()
+			}
+			.padding(.vertical, 4.0)
+		}
+	}
+
+	private func signIn() {
 		apiKey = ""
 		signInPresented = true
 	}
 
-	func signOut() {
+	private func signOut() {
 		user.apiKey = .none
-		PersistenceController.shared.reset()
+		modelContainer.reset()
 	}
 }
 

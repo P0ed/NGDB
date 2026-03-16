@@ -31,7 +31,6 @@ extension MovieList {
 	var typedIndices: Set<MovieIndex> { indices as? Set<MovieIndex> ?? [] }
 
 	func reset(saving: Bool = false) {
-		query = .none
 		page = 0
 		totalPages = 0
 		updatedAt = .distantPast
@@ -64,7 +63,7 @@ extension MovieList {
 		totalPages = Int32(remote.total_pages)
 
 		let movies = remote.results.map { item in
-			Movie.findOrCreate(item, in: context)
+			Movie.findOrCreate(remote: item, in: context)
 		}
 
 		let storedIndices = typedIndices

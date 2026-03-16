@@ -3,7 +3,7 @@ import CoreData
 
 @main
 struct NGDBApp: App {
-	var persistenceController: PersistenceController = .shared
+	var modelContainer: NSPersistentContainer = .shared
 
 	@UserDefault(default: User())
 	var user: User
@@ -17,6 +17,9 @@ struct NGDBApp: App {
 				Tab("Discover", systemImage: "list.bullet.circle") {
 					DiscoverView(list: .discover(in: .main))
 				}
+				Tab("Favourites", systemImage: "star") {
+					FavouritesView()
+				}
 				Tab("Account", systemImage: "person.crop.circle") {
 					UserView(user: $user, settings: $settings)
 				}
@@ -24,9 +27,10 @@ struct NGDBApp: App {
 					SearchView(list: .search(in: .main))
 				}
 			}
-			.tint(.primary)
+			.tint(.secondary)
         }
-		.environment(\.managedObjectContext, .main)
+		.environment(\.modelContainer, modelContainer)
+		.environment(\.managedObjectContext, modelContainer.viewContext)
 		.environment(\.user, user)
 		.environment(\.settings, settings)
 		.environment(\.api, .main(apiKey: user.apiKey))

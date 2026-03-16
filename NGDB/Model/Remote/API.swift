@@ -27,7 +27,8 @@ extension API {
 extension API {
 
 	struct Error: Swift.Error, Decodable {
-		var message: String
+		var status_code: Int
+		var status_message: String
 	}
 
 	struct List: Decodable {
@@ -42,7 +43,8 @@ extension API {
 		var title: String
 		var adult: Bool
 		var backdrop_path: String?
-		var genre_ids: [Int]
+		var genre_ids: [Int]?
+		var genres: [Genre]?
 		var original_language: String
 		var original_title: String
 		var overview: String
@@ -52,5 +54,10 @@ extension API {
 		var vote_average: Float
 		var vote_count: Int
 		var video: Bool
+	}
+
+	struct Genre: Decodable {
+		var id: Int
+		var name: String
 	}
 }
