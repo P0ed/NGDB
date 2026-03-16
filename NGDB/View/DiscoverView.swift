@@ -15,12 +15,13 @@ struct DiscoverView: View {
 	}
 
 	var body: some View {
+		let pagination = LoadAction(paginated: list, api: api)
+
 		NavigationStack {
 			if user.apiKey != .none {
 				InfiniteList(
 					items: indices.randomAccessMap { $0.movie ?? Movie() },
-					shouldLoad: { !list.isComplete },
-					load: { try await list.load(using: api) },
+					pagination: pagination,
 					content: { movie in MovieCell(movie: movie) }
 				)
 				.navigationDestination(for: Movie.self) { movie in
@@ -31,9 +32,9 @@ struct DiscoverView: View {
 			}
 		}
 		.onAppear {
-			if list.isOutdated {
+			if list.isOutdated, !list.isEmpty {
 				list.reset(saving: true)
-				Task { try await list.load(using: api) }
+				pagination.run()
 			}
 		}
 	}

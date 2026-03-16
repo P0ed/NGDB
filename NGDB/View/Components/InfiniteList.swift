@@ -3,8 +3,7 @@ import SwiftUI
 struct InfiniteList<Items: RandomAccessCollection, Content: View>: View
 where Items.Element: Identifiable {
 	var items: Items
-	var shouldLoad: () -> Bool = { false }
-	var load: () async throws -> Void = {}
+	var pagination: LoadAction?
 	var content: (Items.Element) -> Content
 
 	@State private var isLoading: Bool = false
@@ -16,7 +15,7 @@ where Items.Element: Identifiable {
 					content(item)
 						.onAppear {
 							if item.id == items.last?.id {
-								loadItems()
+								pagination?.run()
 							}
 						}
 				}
@@ -24,24 +23,14 @@ where Items.Element: Identifiable {
 			footer
 		}
 		.onAppear {
-			if items.isEmpty { loadItems() }
+			if items.isEmpty { pagination?.run() }
 		}
 	}
 
 	@ViewBuilder
 	private var footer: some View {
-		if isLoading {
+		if let pagination, pagination.isLoading {
 			ProgressView().padding(.vertical, .m)
-		}
-	}
-
-	private func loadItems() {
-		guard !isLoading, shouldLoad() else { return }
-
-		isLoading = true
-		Task {
-			defer { isLoading = false }
-			try await load()
 		}
 	}
 }

@@ -25,6 +25,10 @@ extension MovieList {
 		updatedAt.map { $0.timeIntervalSinceNow > 30.0 * 60.0 } ?? true
 	}
 
+	var isEmpty: Bool {
+		indices.map { $0.count == 0 } ?? true
+	}
+
 	var isComplete: Bool {
 		page != 0 && page >= totalPages
 	}

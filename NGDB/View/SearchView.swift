@@ -16,12 +16,13 @@ struct SearchView: View {
 	}
 
 	var body: some View {
+		let pagination = LoadAction(paginated: list, api: api)
+
 		NavigationStack {
 			if user.apiKey != .none {
 				InfiniteList(
 					items: indices.randomAccessMap { $0.movie ?? Movie() },
-					shouldLoad: { list.page == 0 && list.query != "" },
-					load: { try await list.load(using: api) },
+					pagination: pagination,
 					content: { movie in MovieCell(movie: movie) }
 				)
 				.navigationDestination(for: Movie.self) { movie in
@@ -37,9 +38,7 @@ struct SearchView: View {
 		.onChange(of: query) { _, query in
 			list.query = query
 			try? list.managedObjectContext?.save()
-			if !query.isEmpty {
-				Task { try await list.load(using: api) }
-			}
+			pagination.run()
 		}
 	}
 
