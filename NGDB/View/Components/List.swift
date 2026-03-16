@@ -1,9 +1,10 @@
 import SwiftUI
 
-struct PaginatedList<Items: RandomAccessCollection, Content: View>: View
+struct List<Items: RandomAccessCollection, Content: View>: View
 where Items.Element: Identifiable {
 	var items: Items
-	var load: () async throws -> Void
+	var shouldLoad: () -> Bool = { false }
+	var load: () async throws -> Void = {}
 	var content: (Items.Element) -> Content
 
 	@State var isLoading: Bool = false
@@ -30,12 +31,12 @@ where Items.Element: Identifiable {
 	@ViewBuilder
 	private var footer: some View {
 		if isLoading {
-			ProgressView().padding(.vertical, 12.0)
+			ProgressView().padding(.vertical, .m)
 		}
 	}
 
 	private func loadItems() {
-		if isLoading { return }
+		guard !isLoading, shouldLoad() else { return }
 
 		isLoading = true
 		Task {

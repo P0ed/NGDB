@@ -12,7 +12,8 @@ extension NetworkSession {
 	}
 
 	static func urlSession(apiKey: String?) -> Self {
-		Self { [session = URLSession(configuration: .default)] request in
+		.init { [session = URLSession(configuration: .default)] request in
+
 			let (data, rawMeta) = try await session.data(for: modifying(request) { request in
 				request.setValue("accept", forHTTPHeaderField: "application/json")
 				request.url?.modify { cpts in
@@ -50,7 +51,7 @@ extension NetworkSession {
 	func get<D: Decodable>(url: URL, args: [String: String] = [:]) async throws -> D {
 		let response = try await request(url: url, args: args)
 		do {
-			return try JSONDecoder.api.decode(D.self, from: response.data)
+			return try JSONDecoder().decode(D.self, from: response.data)
 		} catch {
 			throw (try? JSONDecoder().decode(API.Error.self, from: response.data)) ?? error
 		}
@@ -59,7 +60,7 @@ extension NetworkSession {
 	func post<E: Encodable, D: Decodable>(url: URL, body: E? = Data?.none) async throws -> D {
 		let response = try await request(method: "POST", url: url, body: body)
 		do {
-			return try JSONDecoder.api.decode(D.self, from: response.data)
+			return try JSONDecoder().decode(D.self, from: response.data)
 		} catch {
 			throw (try? JSONDecoder().decode(API.Error.self, from: response.data)) ?? error
 		}
@@ -77,41 +78,5 @@ extension NetworkSession {
 		guard response.meta.statusCode == 204 || response.meta.statusCode == 200 else {
 			throw try JSONDecoder().decode(API.Error.self, from: response.data)
 		}
-	}
-}
-
-private extension JSONDecoder {
-
-	static var api: JSONDecoder {
-		let decoder = JSONDecoder()
-		decoder.dateDecodingStrategy = .custom { decoder in
-			let container = try decoder.singleValueContainer()
-			let fmt = ISO8601DateFormatter()
-			fmt.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-			let dateStr = try container.decode(String.self)
-			guard let date = fmt.date(from: dateStr) else {
-				throw DecodingError.dataCorruptedError(
-					in: container,
-					debugDescription: "Cannot decode date string: \(dateStr)"
-				)
-			}
-			return date
-		}
-		return decoder
-	}
-}
-
-extension URLResponse {
-
-	var httpResponse: HTTPURLResponse? {
-		self as? HTTPURLResponse
-	}
-
-	var requestID: String? {
-		httpResponse?.allHeaderFields["x-request-id"].map { val in "\(val)" }
-	}
-
-	var contentType: String? {
-		httpResponse?.allHeaderFields["Content-Type"].map { val in "\(val)" }
 	}
 }

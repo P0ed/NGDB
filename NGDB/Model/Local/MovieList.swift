@@ -26,9 +26,13 @@ extension MovieList {
 		updatedAt.map { $0.timeIntervalSinceNow > 30.0 * 60.0 } ?? true
 	}
 
-	var isComplete: Bool { page > totalPages }
+	var isComplete: Bool {
+		page != 0 && page >= totalPages
+	}
 
-	var typedIndices: Set<MovieIndex> { indices as? Set<MovieIndex> ?? [] }
+	var typedIndices: Set<MovieIndex> {
+		indices as? Set<MovieIndex> ?? []
+	}
 
 	func reset(saving: Bool = false) {
 		page = 0
@@ -40,7 +44,7 @@ extension MovieList {
 
 	@MainActor
 	func load(using api: API) async throws {
-		guard !isComplete else { return }
+		guard !isComplete || query != .none else { return }
 
 		let response = if let query {
 			try await api.search(query)

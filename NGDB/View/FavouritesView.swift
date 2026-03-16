@@ -17,15 +17,9 @@ struct FavouritesView: View {
 			if movies.isEmpty {
 				Text("Favourite movies will appear here")
 			} else {
-				PaginatedList(
+				List(
 					items: movies,
-					load: {},
-					content: { movie in
-						NavigationLink(value: movie) {
-							MovieCell(movie: movie)
-						}
-						.buttonStyle(PlainButtonStyle())
-					}
+					content: { movie in MovieCell(movie: movie) }
 				)
 				.navigationDestination(for: Movie.self) { movie in
 					MovieView(movie: movie)

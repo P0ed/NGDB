@@ -9,7 +9,7 @@ struct MovieView: View {
 
 	var body: some View {
 		ScrollView {
-			VStack(alignment: .leading, spacing: 24.0) {
+			VStack(alignment: .leading, spacing: .xl) {
 				poster
 				overview
 				released
@@ -19,9 +19,7 @@ struct MovieView: View {
 		}
 		.navigationTitle(movie.title ?? "#\(movie.uid)")
 		.toolbar { star }
-		.task { [api, movie = movie.ref] in
-			try? await movie.deref(in: .main).load(using: api)
-		}
+		.task { try? await movie.load(using: api) }
 	}
 
 	@ToolbarContentBuilder
@@ -52,14 +50,14 @@ struct MovieView: View {
 
 	@ViewBuilder
 	private var overview: some View {
-		if let text = movie.overview {
+		if let text = movie.overview, !text.isEmpty {
 			Text(text).multilineTextAlignment(.leading)
 		}
 	}
 
 	@ViewBuilder
 	private var released: some View {
-		if let date = movie.releaseDate {
+		if let date = movie.releaseDate, !date.isEmpty {
 			VStack(alignment: .leading) {
 				Text("Released:")
 					.font(.headline)

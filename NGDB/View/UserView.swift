@@ -21,7 +21,7 @@ struct UserView: View {
 					}
 					section("Settings") {
 						Toggle("Load images", isOn: $settings.loadImages)
-							.padding(.vertical, 4.0)
+							.padding(.vertical, .xs)
 					}
 					section("Data") {
 						resetView
@@ -89,19 +89,19 @@ struct UserView: View {
 				}
 			}
 		}
-		.padding(.vertical)
+		.padding(.vertical, .s)
 	}
 
 	@ViewBuilder
 	private var resetView: some View {
 		if movies.isEmpty {
 			Text("Database is empty")
-				.padding(.vertical, 4.0)
+				.padding(.vertical, .xs)
 		} else {
 			Button("Delete \(movies.count) movies") {
 				modelContainer.reset()
 			}
-			.padding(.vertical, 4.0)
+			.padding(.vertical, .xs)
 		}
 	}
 

@@ -18,17 +18,11 @@ struct DiscoverView: View {
 	var body: some View {
 		NavigationStack {
 			if user.apiKey != .none {
-				PaginatedList(
+				List(
 					items: indices.randomAccessMap { $0.movie ?? Movie() },
-					load: { [list = list.ref] in
-						try await list.deref(in: .main).load(using: api)
-					},
-					content: { movie in
-						NavigationLink(value: movie) {
-							MovieCell(movie: movie)
-						}
-						.buttonStyle(PlainButtonStyle())
-					}
+					shouldLoad: { !list.isComplete },
+					load: { try await list.load(using: api) },
+					content: { movie in MovieCell(movie: movie) }
 				)
 				.navigationDestination(for: Movie.self) { movie in
 					MovieView(movie: movie)
